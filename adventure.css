@@ -1,0 +1,75 @@
+#title
+{
+    position: relative;
+    margin-left: 37%;
+    margin-top: 14%;
+    margin-bottom: 15%;
+    font-size: 100px;
+    color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    -webkit-animation: fadeinandout 4s;
+}
+@-webkit-keyframes fadeinandout
+{
+    0% {top: 0px; opacity: 0;}
+    60% { top: 20px; opacity: 1;}
+    100% {top: 20px;opacity: 0;}
+}
+#inventory
+{
+    position: absolute;
+    margin-top: -700px; 
+    background-color: rgba(255, 255, 255, 0.678);
+    border: rgba(0, 0, 0, 0.39) 5px solid;
+    border-radius: 0px 20px 20px 20px;
+}
+#inventoryitem1, #inventoryitem2, #inventoryitem3
+{
+    border-radius: 0px 20px 20px 20px;
+    width: 60px;
+    height: 60px;
+}
+
+#description
+{
+   font-size: 20px;
+   padding-left: 30px; 
+   padding-top: 20px;
+   padding-bottom: 105px;
+   background-color: rgba(255, 255, 255, 0.678);
+   border: rgba(0, 0, 0, 0.39) 5px solid;
+   border-radius: 20px 20px 0px 0px;
+}
+
+#game-buttons
+{
+    margin-top: -2.65%;
+    margin-left: 30%;
+    width: 600px;
+    background-color: rgb(255, 255, 255);
+    border: rgba(0, 0, 0, 0.39) 5px solid;
+    border-radius: 20px 20px 0px 0px;
+    border-bottom: none;
+}
+#button1, #button2, #button3
+{
+    width: 200px;
+    height: 30px;
+    background-color: rgb(197, 197, 197);
+    border: rgb(97, 97, 97) 1px solid;
+
+}
+#button1
+{
+    border-radius: 15px 0px 0px 0px;
+}
+#button2
+{
+    border-radius: 0px 0px 0px 0px;
+    margin-left: -4px;
+}
+#button3
+{
+    border-radius: 0px 15px 0px 0px;
+    margin-left: -4px;
+}
