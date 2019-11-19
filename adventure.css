@@ -1,31 +1,45 @@
+body{
+    margin: 0px;
+}
+
 #title
 {
+    text-align: center;
     position: relative;
-    margin-left: 37%;
-    margin-top: 14%;
+    padding-top: 14%;
     margin-bottom: 15%;
+    margin-top: 0px;
     font-size: 100px;
     color: rgba(0, 0, 0, 0.7);
     opacity: 0;
-    -webkit-animation: fadeinandout 4s;
+    animation: fadeinandout 4s infinite;
+    animation-play-state: paused;
 }
-@-webkit-keyframes fadeinandout
+@keyframes fadeinandout
 {
-    0% {top: 0px; opacity: 0;}
-    60% { top: 20px; opacity: 1;}
+    0% {top: 0px; opacity: 0; }
+    80% { top: 20px; opacity: 1;}
     100% {top: 20px;opacity: 0;}
 }
 #inventory
 {
     position: absolute;
-    margin-top: -700px; 
+    margin-top: -710px; 
+    margin-left: 5px;
     background-color: rgba(255, 255, 255, 0.678);
     border: rgba(0, 0, 0, 0.39) 5px solid;
     border-radius: 0px 20px 20px 20px;
 }
 #inventoryitem1, #inventoryitem2, #inventoryitem3
 {
+    display: none;
     border-radius: 0px 20px 20px 20px;
+    width: 60px;
+    height: 60px;
+}
+#emptyinventoryfiller
+{
+    display: block;
     width: 60px;
     height: 60px;
 }
@@ -35,7 +49,7 @@
    font-size: 20px;
    padding-left: 30px; 
    padding-top: 20px;
-   padding-bottom: 105px;
+   padding-bottom: 110px;
    background-color: rgba(255, 255, 255, 0.678);
    border: rgba(0, 0, 0, 0.39) 5px solid;
    border-radius: 20px 20px 0px 0px;
