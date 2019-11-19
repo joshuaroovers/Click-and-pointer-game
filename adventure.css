@@ -13,6 +13,7 @@ body{
     color: rgba(0, 0, 0, 0.7);
     opacity: 0;
     animation: fadeinandout 4s infinite;
+    
     animation-play-state: paused;
 }
 @keyframes fadeinandout
@@ -23,6 +24,7 @@ body{
 }
 #inventory
 {
+    
     position: absolute;
     margin-top: -710px; 
     margin-left: 5px;
