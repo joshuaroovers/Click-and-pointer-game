@@ -3,11 +3,13 @@ body{
 }
 *
 {
-    user-select: unset;
+    user-select: none;
 }
 #game-container
 {
-    z-index: -10;
+     z-index: -10;
+     background-size: 100% 100%;
+     background-repeat: no-repeat center center fixed;
 }
 #title
 {
@@ -68,6 +70,7 @@ body{
 
 #game-buttons
 {
+    position: absolute;
     margin-top: -40px;
     margin-left: 30%;
     width: 600px;

@@ -1,23 +1,42 @@
-levelname = {one : "Entrance", two : "Gate"}
+levelname = {one : "Entrance", two : "Left Hallway", three : "Right Hallway"}
 
 haveitem = {Keyblack : false, Keygold : false, Keywhite : false}
 
 beenhere = {Entrance : false, NoKey : false, Hallwayright : false, Hallwayleft : false}
 
 keycount = 0;
-
+createshimmer = 0;
+/////////////////////////////////////////////////////////Key smith because ofcours. also hollow knight lol
 var title = document.getElementById("title")
 var background = document.getElementById("game-container")
 var dialog = document.getElementById("description")
-var inventory = document.getElementById("inventory")
-var inv1 = document.getElementById("inventory1")
+
+
+var inventory = document.createElement("div")
+inventory.id = "inventory";
+background.appendChild(inventory);
+
+var invblank = document.createElement("div");
+invblank.id = "emptyinventoryfiller"
+inventory.appendChild(invblank);
+
+var inv1 = document.getElementById("inventoryitem1")
+inventory.appendChild(inv1);
+
 
 var buttonscontainer = document.getElementById("game-buttons")
 var keuze1 = document.getElementById("button1")
 var keuze2 = document.getElementById("button2")
 var keuze3 = document.getElementById("button3")
+background.appendChild(title)
+background.appendChild(dialog)
+background.appendChild(buttonscontainer)
 
 var shimmeritem = document.createElement("div");
+
+var Keygold = document.createElement("div");
+var Keyblack = document.createElement("div");
+var Keywhite = document.createElement("div");
 
 
 
@@ -71,8 +90,6 @@ function Entrance()//////dialog
     buttonscontainer.style.display = "none";
 
     title.textContent = levelname["one"];
-    background.style.backgroundRepeat = "no-repeat center center fixed"
-    background.style.backgroundSize = "100% 100%"
     background.style.backgroundImage = "url(./images/backgrounds/dungeondoor.jpg)"
     
     if(beenhere["Entrance"] === false)
@@ -80,13 +97,19 @@ function Entrance()//////dialog
         titleanimation();
         dialog.textContent = "We're in a large empty room"
         dialog.onclick = function(){Entrancedialog1()};
-        
     }
-    else if (beenhere["Entrance"] === true)
+    else
     {
         Entrancechoice();
     }
+
     
+}
+
+function Entrancereturn()
+{
+    dialog.textContent = "You go back to the entrance"
+    dialog.onclick = function(){Entrance()};
 }
 
 function Entrancedialog1()///beter dialog
@@ -105,12 +128,13 @@ function Entrancedialog3()///beter dialog
 {
     dialog.textContent = "Or we could check out these two hallways on the left and right."
     dialog.onclick = function(){Entrancechoice()};
+    beenhere["Entrance"] = true;
 }
+
 function Entrancechoice()////multiple key thing
 {
     Choices();
-    beenhere["Entrance"] = true;
-
+    
     dialog.textContent = "What will you do?"
     keuze1.onclick = function(){EntranceGoleft()};
     keuze1.textContent = "Go left"
@@ -134,17 +158,19 @@ function Entrancechoice()////multiple key thing
         keuze2.onclick = function(){EntranceNokey()};
     }
 }
+
 function EntranceGoleft()
 {
     NoChoices();
     dialog.textContent = "Left it is!"
     dialog.onclick = function(){Hallwayleft()}
 }
+
 function EntranceGoright()
 {
     NoChoices();
     dialog.textContent = "Let's go right!"
-    dialog.onclick = function(){HallwayRight()}
+    dialog.onclick = function(){Hallwayright()}
 }
 
 function EntranceNokey()///beter dialog
@@ -154,6 +180,7 @@ function EntranceNokey()///beter dialog
     dialog.textContent = "You seem to need a key for this door";
     dialog.onclick = function(){Entrancechoice()};
 }
+
 function Endingpicker()////NYI
 {
     dialog.textContent = "Time to open this door and see what's behind it"
@@ -188,63 +215,137 @@ function Endingchoice()
 function Endingpickkey()
 {
     dialog.textContent = "Wich key do you want to use?"
-    keuze1.width = "150px"
-    keuze2.display = " none"
-    keuze3.width = "150px"
+
     if(haveitem["Keygold"] === true && haveitem["Keyblack"] === true)
     {
         keuze1.textContent = "Use the gold key"
-        keuze2.textContent = "Use the black key"
+        keuze2.textContent = "Not yet"
+        keuze3.textContent = "Use the black key"
         keuze1.onclick = function(){}
         keuze2.onclick = function(){}
+        keuze3.onclick = function(){}
     }
     else if(haveitem["Keywhite"] === true && haveitem["Keygold"] === true)
     {
         keuze1.textContent = "Use the white key"
-        keuze2.textContent = "Use the gold key"
+        keuze2.textContent = "Not yet"
+        keuze3.textContent = "Use the gold key"
         keuze1.onclick = function(){}
         keuze2.onclick = function(){}
+        keuze3.onclick = function(){}
     }
-    else if(haveitem["Keyblack"] === true && haveitem["Keywhite"] === true)
+    else if(haveitem["Keyblack"] === true && haveitem["Keywhite"] === true)////fuse
     {
         keuze1.textContent = "Use the black key"
-        keuze2.textContent = "Use the white key"
+        keuze2.textContent = "Not yet"
+        keuze3.textContent = "Use the white key"
         keuze1.onclick = function(){}
         keuze2.onclick = function(){}
+        keuze3.onclick = function(){}
     }
 }
+
+
+
 function Hallwayleft()
 {
-    titleanimation()
     title.style.color = "rgba(56, 56, 56, 0.7)";
-    title.textContent = "Left Hallway";
+    title.textContent = levelname["two"];
     background.style.backgroundImage = "url(./images/backgrounds/hallway.jpg)";
-    dialog.textContent = "Spooky hallway? that's fine...";
-    dialog.onclick = function(){Hallwayldialog1()};
+
+    if (beenhere["Hallwayleft"] === false)
+    {
+        titleanimation()
+
+        if(beenhere["Hallwayright"] === true)
+        {
+            dialog.textContent = "This hallway is somewhat longer than the one on the right";
+        }
+        else
+        {
+            dialog.textContent = "Spooky hallway? that's fine...";
+        }
+        dialog.onclick = function(){Hallwayldialog1()};        
+    }
+    dialog.onclick = function(){};
 }
+
 function Hallwayldialog1()
 {
     dialog.textContent = "Not like there are any monsters here, haha";
     dialog.onclick = function(){Hallwayldialog2()};
 }
-function HallwayRight()////////dialog
+
+function Hallwayldialog2()
 {
-    titleanimation()
-    title.style.color = "rgba(56, 56, 56, 0.7)";
-    title.textContent = "Right Hallway";
-    background.style.backgroundImage = "url(./images/backgrounds/hallway_crack.jpg)";
-    dialog.textContent = "FILLER";
-    background.appendChild(shimmeritem);
-    shimmeritem.style.backgroundImage = "url(./images/items/shimmer.jpg)";
-    shimmeritem.style.width = "10px";
-    shimmeritem.style.height = "10px";
-    shimmeritem.style.position = "absolute";
-    shimmeritem.style.marginTop = "-240px";
-    shimmeritem.style.marginLeft = "910px";
-    shimmeritem.onclick = function(){alert("")}; 
-    dialog.onclick = function(){};
+    dialog.textContent = "There are two corridors at the end. On the left an Y and on the right an Y. You could also go back..";
+    dialog.onclick = function(){Hallwaylchoice()};
 }
 
+
+
+function Hallwayright()////////dialog
+{
+    createshimmer++;
+
+    title.style.color = "rgba(56, 56, 56, 0.7)";
+    title.textContent = levelname["three"];
+    background.style.backgroundImage = "url(./images/backgrounds/hallway_crack.jpg)";
+
+    if(beenhere["Hallwayright"] === false)
+    {
+        titleanimation()
+
+        if(beenhere["Hallwayleft"] === true)
+        {
+            dialog.textContent = "This hallway is much darker than the one on the left";
+        }
+        else
+        {
+            dialog.textContent = "Spooky hallway? that's fine...";
+        }
+        dialog.onclick = function(){Hallwayrdialog1()}
+    }
+    else
+    {
+        dialog.onclick = function(){Hallwayrchoice()};
+    }
+    
+    if (createshimmer > 2 )
+    {
+        background.appendChild(shimmeritem);
+        shimmeritem.style.backgroundImage = "url(./images/items/shimmer.jpg)";
+        shimmeritem.style.width = "10px";
+        shimmeritem.style.height = "10px";
+        shimmeritem.style.position = "absolute";
+        shimmeritem.style.marginTop = "-240px";
+        shimmeritem.style.marginLeft = "910px";
+        shimmeritem.onclick = function(){};
+    }
+}
+function Hallwayrdialog1()
+{
+    dialog.textContent = "Well besides that crack in the wall and less lighting here there isn't anything intressting. Let's move on"
+    dialog.onclick = function(){Hallwayrdialog2()}
+}
+function Hallwayrdialog2()
+{
+    dialog.textContent = "There are two corridors at the end. On the left an X and on the right an X. You could also go back.."
+    dialog.onclick = function(){Hallwayrchoice()}
+    beenhere["Hallwayright"] = true;
+}
+function Hallwayrchoice()
+{
+    Choices()
+    dialog.textContent = "Where do you go?"
+    keuze1.textContent = "Go left"
+    keuze2.textContent = "Go back"
+    keuze3.textContent = "Go right"
+
+    keuze1.onclick = function(){}
+    keuze2.onclick = function(){Entrancereturn()}
+    keuze3.onclick = function(){}
+}
 
 
 function titleanimation()
@@ -272,3 +373,14 @@ function Choices()
     keuze2.style.display = "unset";
     keuze3.style.display = "unset";
 }
+
+
+
+/*
+leaving the dialog empty will create a blank space at the bottom
+having more than 1 line of text in the dialog will make the dialog box to big because ofcourse it does
+
+beenhere can backfire
+
+MAKE SURE ALL NAMES ARE CORRECT
+*/
