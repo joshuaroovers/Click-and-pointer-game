@@ -34,11 +34,12 @@ body{
     margin-bottom: 11%;
     margin-top: 0px;
     font-size: 100px;
+
+    animation: fadetitle 3s infinite;
+    animation-play-state: paused;
     color: rgba(0, 0, 0, 0.7);
 
     opacity: 0;
-    animation: fadetitle 3s infinite;
-    animation-play-state: paused;
 }
 @keyframes fadetitle
 {
@@ -46,6 +47,7 @@ body{
     80% { top: 20px; opacity: 1;}
     100% {top: 20px;opacity: 0;}
 }
+
 #shimmer
 {
     animation: shimmeranimation 2s infinite;
@@ -68,7 +70,7 @@ body{
     border: rgba(0, 0, 0, 0.39) 5px solid;
     border-radius: 0px 20px 20px 20px;
 }
-#inventoryitem
+#inventoryitem1, #inventoryitem2, #inventoryitem3, #inventoryitem4, #inventoryitem5, #inventoryitem6
 {
     display: none;
     border-radius: 17px 17px 17px 17px;
