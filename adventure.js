@@ -13,7 +13,7 @@ greenhousdooropen = false
 craftingitemcount = 0
 createshimmer = 0
 createshimmermimic = 0
-x = 0;
+
 
 
 //#region                       //Most DOM variables
@@ -76,6 +76,7 @@ var keyrecipe = document.createElement("div")
 
 var Crowbar = document.createElement("img")////////////////////////background image with div pls DO NOT UNLESS YOU WANT TO SPECIFY THE SIZES
 var Trowel = document.createElement("img")
+var flowerpot = document.createElement("div")
 
 var Keygold = document.createElement("img")
 var Keyblack = document.createElement("img")
@@ -194,7 +195,7 @@ function Entrancechoice()////multiple key thing ///diffrent color for "You can o
     {
         NoChoices()
         dialog.textContent = "Left it is!"
-        dialog.onclick = function(){Hallwayleft(), title.style.color = "rgb(50, 50, 50)"}
+        dialog.onclick = function(){Hallwayleft(), title.style.color = "rgb(100, 100, 100)"}
     }
     
 
@@ -223,7 +224,7 @@ function Entrancechoice()////multiple key thing ///diffrent color for "You can o
     {
         NoChoices()
         dialog.textContent = "Let's go right!"
-        dialog.onclick = function(){Hallwayright(), title.style.color = "rgb(5, 5, 5)"}
+        dialog.onclick = function(){Hallwayright(), title.style.color = "rgb(100, 100, 100)"}
     }
 }
 
@@ -342,7 +343,7 @@ function Hallwayleft()
                 dialog.textContent = "On the left is a very dark room. You can't see anything in there. the sign above the door frame says: [𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁 𝓇𝑜𝑜𝓂]"
                 dialog.onclick = function()
                 {
-                    dialog.textContent = "On the right is an other poorly lit room, all you can see are some plants creeping up through the cracks"
+                    dialog.textContent = "On the right is a very cave like room"
                     dialog.onclick = function()////underground black lake + white key
                     {
                         dialog.textContent = "Or you could go back to the first room"
@@ -356,26 +357,26 @@ function Hallwayleft()
     }
     else
     {
-        dialog.onclick = function(){Hallwaylchoice()}
+        Hallwaylchoice()
     }
 }
 
 function Hallwaylchoice()//////only right
 {
-    beenhere["Hallwayleft"] === true
+    beenhere["Hallwayleft"] = true
 
     Choices()
     
     dialog.textContent = "Where do you go?"
     keuze1.textContent = "Go left" // 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁 𝓇𝑜𝑜𝓂
     keuze2.textContent = "Go back"
-    keuze3.textContent = "Go right" //underground black lake + white key
+    keuze3.textContent = "Go right" //indiana jones thing for the black key? swap it for the gem but you could take it back and time a trap
 
     keuze1.onclick = function()
     {
         NoChoices()
         dialog.textContent = " You go to the 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁 𝓇𝑜𝑜𝓂"
-        dialog.onclick = function(){𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂(), title.style.color = "rgb(50, 50, 50)"}
+        dialog.onclick = function(){𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂(), title.style.color = "rgb(100, 100, 100)"}
     }
 
 
@@ -441,6 +442,13 @@ function 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂()
         dialog.textContent = "No need to go back in there"
         dialog.onclick = function(){Hallwayleft()}
     }
+    else if (beenhere["𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂"] === 3)
+    {
+        NoChoices()
+        beenhere["𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂"] = 2
+        dialog.textContent = "You should go back to the hallway"
+        dialog.onclick = function(){Hallwayleft()}
+    }
 
     if(haveitem["Keywhite"] === 0)
     {
@@ -458,6 +466,7 @@ function 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂𝒸𝒽𝑜𝒾�
     dialog.textContent = "Wow, it's even darker than it looked like from outside"
     dialog.onclick = function()
     { 
+        beenhere["𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂"] = 3
         buttonscontainer.style.display = "unset"
         keuze1.style.display = "unset"
         keuze1.style.width = "300px"
@@ -520,7 +529,73 @@ function 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂𝒸𝒽𝑜𝒾�
                                             shimmerlure.remove()
                                             dialog.onclick = function()
                                             {
-                                                dialog.textContent = "Well we're fucked now anyway"///////////////////////////////////////////////////////////////you gotta go back aswel :)
+                                                dialog.textContent = "Well that was the good news"///////////////////////////////////////////////////////////////you gotta go back aswel :)
+                                                dialog.onclick = function()
+                                                {
+                                                    dialog.textContent = "The bad news.. well"
+                                                    dialog.onclick = function()
+                                                    {
+                                                        dialog.textContent = "Let's say I hope you have a good memory because your going to have to go the same way back"
+                                                        dialog.onclick = function()
+                                                        {
+                                                            dialog.textContent = "Where do you go.."
+                                                            buttonscontainer.style.display = "unset"
+
+                                                            keuze1.onclick = function()
+                                                            {
+                                                                buttonscontainer.style.display = "none"
+                                                                dialog.textContent = "Left . . ."
+                                                                dialog.onclick = function()
+                                                                {
+                                                                    dialog.textContent = "Okay, next go."
+
+                                                                    buttonscontainer.style.display = "unset"
+
+                                                                    keuze1.onclick = function()
+                                                                    {
+                                                                        buttonscontainer.style.display = "none"
+                                                                        dialog.textContent = "Left . ."
+                                                                        dialog.onclick = function(){death("You took a wrong step in the 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂")}
+                                                                    }
+                                                                    keuze3.onclick = function()
+                                                                    {
+                                                                        buttonscontainer.style.display = "none"
+                                                                        dialog.textContent = "Right . ."
+                                                                        dialog.onclick = function()
+                                                                        {
+                                                                            dialog.textContent = "One more!"
+
+                                                                            buttonscontainer.style.display = "unset"
+
+                                                                            keuze1.onclick = function()
+                                                                            {
+                                                                                buttonscontainer.style.display = "none"
+                                                                                dialog.textContent = "Left and?"
+                                                                                dialog.onclick = function(){death("You took a wrong step in the 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂")}
+                                                                            }
+                                                                            keuze3.onclick = function()
+                                                                            {
+                                                                                buttonscontainer.style.display = "none"
+                                                                                dialog.textContent = "Right and?"
+                                                                                dialog.onclick = function()
+                                                                                {
+                                                                                    dialog.textContent = "Yes! You made it!"
+                                                                                    dialog.onclick = function(){𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂()}
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                                
+                                                            }
+                                                            keuze3.onclick = function()
+                                                            {
+                                                                dialog.textContent = "Right . . ."
+                                                                dialog.onclick = function(){death("You took a wrong step in the 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂")}
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -581,6 +656,8 @@ function 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂𝒸𝒽𝑜𝒾�
         }
     }
 }
+
+
 
 
 function Hallwayright()////////dialog
@@ -781,14 +858,12 @@ function Greenhouse()
        Greenhousechoice()
    }
 
-   if(haveitem["Keygold"] === 0)
-   {
-       Keygold.style.position = "absolute"
-       background.appendChild(Keygold)
-       Keygold.src = "./images/items/Keygold.png"
-       Keygold.style.marginLeft = "350px"
-       Keygold.style.marginBottom = "230px"
-   }
+   background.appendChild(flowerpot)
+   flowerpot.style.position = "absolute"
+   flowerpot.style.width = "150px"
+   flowerpot.style.marginLeft = "50px"
+   flowerpot.style.height = "150px"
+   
    if(haveitem["Trowel"] === false)
    {
        Keygold.style.position = "absolute"
@@ -818,23 +893,52 @@ function Greenhousechoice()
     {
         NoChoices()
         dialog.textContent = "You go back to the hallway"
-        Keygold.remove()
         Trowel.remove()
-        dialog.onclick = function(){Hallwayright()}
+        flowerpot.remove()
+        dialog.onclick = function(){Hallwayright(), title.style.color = "rgb(100, 100, 100)"}
     }
 
-    Keygold.onclick = function()
+    flowerpot.onclick = function()
     {
-        NoChoices()
-        dialog.textContent = "A key!"
-        dialog.onclick = function()
+        if(haveitem["Keygold"] === 1)
         {
-            dialog.textContent = "You should definitly take that"
-            haveitem["Keygold"] = 1
-            
-            inv2.src = "./images/items/Keygoldinv.jpg"
-            inv2.style.display = "unset"
-            Keygold.remove()
+            NoChoices()
+            dialog.textContent = "You tortured that plant more than enough"
+            dialog.onclick = function(){Greenhouse()}
+        }
+        if(haveitem["Trowel"] === true && haveitem["Keygold"] === 0)
+        {
+            NoChoices()
+            dialog.textContent = "You realy want to dig up this poor potted plant?"
+            dialog.onclick = function()
+            {
+                dialog.textContent = "Okay then"
+                dialog.onclick = function()
+                {
+                    dialog.textContent = "Wait.."
+                    dialog.onclick = function()
+                    {
+                        dialog.textContent = "Is that?"
+                        dialog.onclick = function()
+                        {
+                            dialog.textContent = "A key!"
+                            inv2.src = "./images/items/Keygoldinv.jpg"
+                            inv2.style.display = "unset"
+                            haveitem["Keygold"] = 1
+                            dialog.onclick = function()
+                            {
+                                dialog.textContent = "That plant was a thief!"
+                                dialog.onclick = function(){Greenhouse()}
+                            }
+                        }  
+                    }
+                }
+            }
+        }
+        else
+        {
+            NoChoices()
+            dialog.textContent = "What a lovely plant"
             dialog.onclick = function(){Greenhouse()}
         }
     }
@@ -917,7 +1021,7 @@ function Workshopchoice()
     {
         NoChoices()
         dialog.textContent = "You go back to the hallway"
-        dialog.onclick = function(){Hallwayright()}
+        dialog.onclick = function(){Hallwayright(), title.style.color = "rgb(100, 100, 100)"}
     }
     keuze3.onclick = function()
     {
