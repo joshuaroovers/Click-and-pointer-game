@@ -5,6 +5,7 @@ body{
 *
 {
     user-select: none;
+    overflow: hidden;
 }
 #game-container
 {
@@ -44,13 +45,13 @@ body{
 }
 #spinny
 {
-    animation: spin 5s infinite;
+    animation: spin 1s linear infinite;
 }
 @keyframes spin
 {
-    0% {rotate: 0;}
-    50% {rotate: 160;}
-    100%{rotate: 360;}
+    0% {transform: rotate(0deg);}
+    
+    100% {transform: rotate(360deg);}
 }
 #title
 {

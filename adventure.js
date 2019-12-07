@@ -1,14 +1,15 @@
 levelname = {one : "Entrance", two : "Left Hallway", three : "Right Hallway", four : "The Workshop", five : "The Greenhouse", six : "Peacefull room", seven : "The Cave room"}
 
-haveitem = {Keyblack : 0, Keygold : 1, Keywhite : 1, shimmer : 0, KeyBW : false, Keymaster : false, Crowbar : false, Trowel : false}/////0 is false, 1 is true, 2 is used to have but crafted into something else
+haveitem = {Keyblack : 0, Keygold : 0, Keywhite : 0, shimmer : 0, KeyBW : false, Keymaster : false, Crowbar : false, Trowel : false}/////0 is false, 1 is true, 2 is used to have but crafted into something else
 //make shure it's possible to be inserted in the dumb waiter
 beenhere = {Entrance : false, NoKey : false, Hallwayright : false, Hallwayleft : false, Workshop : false, Dumbwaiter : false, Locker : 0, Greenhouse : false, 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂 : 0, Caveroom : 0}
 //locker is special case since you shouldn't die if you did take the item and go back
 freeinvslot = {inv1 : true, inv2 : true, inv3 : true, inv4 : true, inv5 : true}
 
+restarttext = ["Goodluck!", "Try not to die", "Goodluck you'll need it", "See you there", "Restarting...", "1 key to rule them all", "Beware the eyes", "Be nice to plants", "beware the light in the dark", "I'll be watching you"]
 deathtaunting = ["Is it too hard for you?", "Oh well too bad", "Thought so", "Good bye then", "Are you sure you got everything?", "Bye bye bye", "... I'll miss you"]
 
-keycount = 2
+keycount = 0
 greenhousdooropen = false
 createshimmer = 0
 createshimmermimic = 0
@@ -78,6 +79,7 @@ var keyrecipe = document.createElement("div")
 var Crowbar = document.createElement("img")////////////////////////background image with div pls DO NOT UNLESS YOU WANT TO SPECIFY THE SIZES
 var Trowel = document.createElement("img")
 var flowerpot = document.createElement("div")
+var spinny = document.createElement("img")
 
 var Keyblackstuck = document.createElement("div")
 var gemsocket = document.createElement("div")
@@ -91,7 +93,7 @@ buttonscontainer.appendChild(keuze4)
 
 Start()
 
-function Start()//////beter dialog
+function Start()
 {
     titleanimation()
     inventory.style.display = "none"
@@ -131,7 +133,7 @@ function Startchoice()
 
 
 
-function Entrance()//////dialog
+function Entrance()
 {
     title.style.color = "rgba(0, 0, 0, 0.7)"
     background.style.backgroundColor = "white"
@@ -180,7 +182,7 @@ function Entrance()//////dialog
     
 }
 
-function Entrancechoice()////multiple key thing ///diffrent color for "You can open door signifier"
+function Entrancechoice()///diffrent color for "You can open door signifier"
 {
     Choices()
     
@@ -230,7 +232,7 @@ function Entrancechoice()////multiple key thing ///diffrent color for "You can o
 }
 
 
-function Endingpicker()////NYI
+function Endingpicker()
 {
     NoChoices()
     dialog.textContent = "Time to open this door and see what's behind it"
@@ -256,7 +258,7 @@ function Endingpicker()////NYI
         {
             dialog.onclick = function(){EndingBW()}
         }
-        else if(haveitem["Keymaster"] === 1)
+        else if(haveitem["Keymaster"] === true)
         {
             dialog.onclick = function(){EndingMaster()}
         }
@@ -437,13 +439,61 @@ function EndingBlack()
     }
 }
 
-
-
-/* function EndingX()
+function EndingBW()
 {
-    background.style.backgroundImage = "url(./images/backgrounds/EndingX.jpg"
-    dialog.textContent = ""
-} */
+    background.style.backgroundImage = "url(./images/backgrounds/EndingBW.png"
+    document.body.appendChild(spinny)
+
+    spinny.style.position = "absolute"
+    spinny.src = "./images/items/spinny.jpg"
+    spinny.id = "spinny"
+    spinny.style.zIndex = "-5"
+
+    spinny.style.width = "700px"
+    spinny.style.marginLeft = "425px"
+    spinny.style.marginTop = "-725px"
+
+    dialog.textContent = "!!!"
+    dialog.onclick = function()
+    {
+        dialog.textContent = "*You managed to get a special key*"
+        dialog.onclick = function()
+        {
+            dialog.textContent = "*Well done*"
+            dialog.onclick = function()
+            {
+                dialog.textContent = "*You are far from done tho*"
+                dialog.onclick = function()
+                {
+                    dialog.textContent = "*Alright send them back*"
+                    setTimeout(function(){location.reload()},3000)
+                }
+            }
+        }
+    }
+}
+
+function EndingMaster()
+{
+    background.style.backgroundImage = "url(./images/backgrounds/Endingm1.jpg"
+    dialog.textContent = "!!!"
+    dialog.onclick = function()
+    {
+        dialog.textContent = "*Well done mortal*"
+        dialog.onclick = function()
+        {
+            dialog.textContent = "*You have proven yourself worthy, come join us*"
+            dialog.onclick = function()
+            {
+                background.style.backgroundImage = "url(./images/backgrounds/Endingm2.jpg"
+                dialog.textContent = "*You have gathered all keys and made the master key*"
+                dialog.onclick = function(){WIN()}
+            }
+        }
+    }
+}
+
+
 
 //#endregion
 
@@ -492,7 +542,7 @@ function Hallwayleft()
     }
 }
 
-function Hallwaylchoice()//////only right
+function Hallwaylchoice()
 {
     beenhere["Hallwayleft"] = true
 
@@ -585,7 +635,7 @@ function 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂()
 
 }
 
-function 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂𝒸𝒽𝑜𝒾𝒸𝑒()////
+function 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂𝒸𝒽𝑜𝒾𝒸𝑒()
 {
     background.style.backgroundImage = "url(./images/backgrounds/black.jpg)"
     dialog.textContent = "Wow, it's even darker than it looked like from outside"
@@ -656,13 +706,13 @@ function 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂𝒸𝒽𝑜𝒾�
                                             shimmerlure.remove()
                                             dialog.onclick = function()
                                             {
-                                                dialog.textContent = "Well that was the good news"///////////////////////////////////////////////////////////////you gotta go back aswel :)
+                                                dialog.textContent = "Well that was the good news"
                                                 dialog.onclick = function()
                                                 {
                                                     dialog.textContent = "The bad news.. well"
                                                     dialog.onclick = function()
                                                     {
-                                                        dialog.textContent = "Let's say I hope you have a good memory because your going to have to go the same way back"
+                                                        dialog.textContent = "your going to have to go the same way back you came"
                                                         dialog.onclick = function()
                                                         {
                                                             dialog.textContent = "Where do you go.."
@@ -1014,7 +1064,7 @@ function Caveroomchoice()
 
 
 
-function Hallwayright()////////dialog
+function Hallwayright()
 {
     createshimmer++
     shimmeritem.style.display = "unset"
@@ -1131,7 +1181,7 @@ function Hallwayright()////////dialog
     }
 }
 
-function Hallwayrchoice()//////////////////////////////left and right
+function Hallwayrchoice()
 {
     Choices()
     dialog.textContent = "Where do you go?"
@@ -1542,7 +1592,7 @@ function keyrecipedisplay()
         background.style.backgroundImage = "url(./images/backgrounds/dumbwaiter.jpg)"
     }
 }
-function dumbwaitertrading()///////////////if more items which prob need to add more things ALSO THERE ARE THREEE
+function dumbwaitertrading()
 {
     if(haveitem["shimmer"] === 1 || haveitem["Keygold"] === 1 || haveitem["Keywhite"] === 1 || haveitem["Keyblack"] === 1)
     {
@@ -1717,7 +1767,7 @@ function dumbwaitertrading()///////////////if more items which prob need to add 
 //#endregion
 
 
-function death(deathmessage)////////////////////////////////////////////random restart message
+function death(deathmessage)
 {
     inventory.style.display = "none"
     background.style.backgroundImage = "none" 
@@ -1751,7 +1801,8 @@ function death(deathmessage)////////////////////////////////////////////random r
                     {
                         NoChoices()
                         dialog.onclick = "none"
-                        dialog.textContent = "Good luck.."//////////////////////////////////////////////////////////
+                        randomnumber = Math.floor(Math.random() * 10)
+                        dialog.textContent = restarttext[randomnumber]
                         setTimeout(function(){location.reload()},2000)
                     }
                     keuze3.onclick = function()
@@ -1774,10 +1825,10 @@ function death(deathmessage)////////////////////////////////////////////random r
 function WIN()
 {
     title.textContent = "Congratulations!"
+    title.style.color = "white"
     titleanimation()
     inventory.style.display = "none"
     background.style.backgroundImage = "none"
-    background.style.backgroundColor = "rgb(200, 200, 200)"
     dialog.textContent = "You made it!"
     dialog.onclick = function()
     {
@@ -1797,7 +1848,8 @@ function WIN()
             {
                 NoChoices()
                 dialog.onclick = "none"
-                dialog.textContent = "Good luck!"//////////////////////////////////////////////////////////
+                randomnumber = Math.floor(Math.random() * 10)
+                dialog.textContent = restarttext[randomnumber]
                 setTimeout(function(){location.reload()},2000)
             }
             keuze3.onclick = function()
@@ -1811,14 +1863,14 @@ function WIN()
     }
 }
 
-function titleanimation()////////////////////////any fix because anoyence
+function titleanimation()
 {
     title.style.animationPlayState = "running"
     setTimeout(function(){title.style.animationPlayState = "paused"}, 3000)
     title.style.color = "rgba(0, 0, 0, 0.7)"
 }
 
-function NoChoices()////del the thing
+function NoChoices()
 {
     buttonscontainer.style.display = "none"
     keuze1.style.backgroundColor = "rgb(197, 197, 197)"
@@ -1845,14 +1897,3 @@ function Choices()
     keuze2.style.display = "unset"
     keuze3.style.display = "unset"
 }
-
-
-
-/*
-leaving the dialog empty will create a blank space at the bottom
-having more than 1 line of text in the dialog will make the dialog box to big because ofcourse it does
-
-beenhere can backfire    how tho past me?!    possibly if there is an "if" it will just skip everything if there isn't an else since java wont wait for you to click on things
-
-MAKE SURE ALL NAMES ARE CORRECT
-*/
