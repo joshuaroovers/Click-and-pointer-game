@@ -395,6 +395,7 @@ function EndingGold()
                             dialog.onclick = function()
                             {
                                 dialog.textContent = "*YOU WILL PAY FOR THAT*"
+                                dialog.onclick = "none"
                                 setTimeout(function(){death("The plant guardian got their revenge")},2000)
                             }
                         }
@@ -418,6 +419,7 @@ function EndingWhite()
             dialog.onclick = function()
             {
                 dialog.textContent = "*IT WILL DIE*"
+                dialog.onclick = "none"
                 setTimeout(function(){death("You got killed by ●︎●︎")},2000)
             }
         }
@@ -434,6 +436,7 @@ function EndingBlack()
         dialog.onclick = function()
         {
             dialog.textContent = "You escaped"
+            dialog.onclick = "none"
             setTimeout(function(){WIN()},3000)
         }
     }
@@ -466,6 +469,7 @@ function EndingBW()
                 dialog.onclick = function()
                 {
                     dialog.textContent = "*Alright send them back*"
+                    dialog.onclick = "none"
                     setTimeout(function(){location.reload()},3000)
                 }
             }
@@ -487,6 +491,7 @@ function EndingMaster()
             {
                 background.style.backgroundImage = "url(./images/backgrounds/Endingm2.jpg"
                 dialog.textContent = "*You have gathered all keys and made the master key*"
+                dialog.onclick = "none"
                 dialog.onclick = function(){WIN()}
             }
         }
@@ -878,15 +883,15 @@ function Caveroom()
                 beenhere["Caveroom"] = 2
                 dialog.onclick = function(){Hallwayleft(), background.style.animationPlayState = "paused"}
             }
-            //setTimeout(
-               // function()
-              //  {
-                   // if(cavetimer === true)
-                   // {
-                      //  NoChoices()
-                     //   death("You didn't make it out of the caveroom in time")
-                    //}
-                //},3000)
+            setTimeout(
+                function()
+                {
+                    if(cavetimer === true)
+                    {
+                        NoChoices()
+                        death("You didn't make it out of the caveroom in time")
+                    }
+                },3000)
         }
     }
 
