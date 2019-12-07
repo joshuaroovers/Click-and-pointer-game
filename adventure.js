@@ -1114,7 +1114,7 @@ function Caveroomchoice()
         }
         Keyblackstuck.onclick = function()
         {
-            if(haveitem["Keyblack"] === 1)
+            if(haveitem["Keyblack"] != 1)
             {
                 dialog.textContent = "The key is stuck"
                 dialog.onclick = function()
