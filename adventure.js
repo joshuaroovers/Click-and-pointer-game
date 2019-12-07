@@ -236,7 +236,7 @@ function Endingpicker()
 {
     NoChoices()
     dialog.textContent = "Time to open this door and see what's behind it"
-    if(keycount === 2)
+    if(keycount > 1)
     {
         dialog.onclick = function(){Endingpickkey()}
     }
@@ -269,12 +269,51 @@ function Endingpickkey()
 {
     dialog.textContent = "Wich key do you want to use?"
     Choices()
-    if(haveitem["Keygold"] === 1 && haveitem["Keyblack"] === 1)
+    if(haveitem["Keygold"] === 1 && haveitem["Keyblack"] === 1 && haveitem["Keywhite"])
+    {
+        keuze1.textContent = "Use the gold key"
+        keuze2.textContent = "Use the black key"
+        keuze3.textContent = "Use the white key"
+
+        keuze1.style.width = "150px"
+        keuze2.style.width = "150px"
+        keuze3.style.width = "150px"
+        keuze4.style.width = "150px"
+        keuze4.style.display = "unset"
+
+        keuze4.textContent = "Not yet"
+        
+        keuze1.onclick = function()
+        {
+            NoChoices()
+            dialog.textContent = "You use the gold key"
+            dialog.onclick = function(){EndingGold()}
+        }
+        keuze2.onclick = function()
+        {
+            NoChoices()
+            dialog.textContent = "You use the black key"
+            dialog.onclick = function(){EndingBlack()}
+        }
+        keuze3.onclick = function()
+        {
+            NoChoices()
+            dialog.textContent = "You use the white key"
+            dialog.onclick = function(){EndingWhite()}
+        }
+        keuze4.onclick = function()
+        {
+            NoChoices()
+            dialog.textContent = "You decide to wait"
+            dialog.onclick = function(){Entrance()}
+        }
+    }
+    else if(haveitem["Keygold"] === 1 && haveitem["Keyblack"] === 1)
     {
         keuze1.textContent = "Use the gold key"
         keuze2.textContent = "Not yet"
         keuze3.textContent = "Use the black key"
-        keuze1.onclick = function(){}
+
         keuze1.onclick = function()
         {
             NoChoices()
@@ -437,7 +476,7 @@ function EndingBlack()
         {
             dialog.textContent = "You escaped"
             dialog.onclick = "none"
-            setTimeout(function(){WIN()},3000)
+            setTimeout(function(){WIN(), title.style.color = "rgb(240,240,240)"},3000)
         }
     }
 }
@@ -492,7 +531,7 @@ function EndingMaster()
                 background.style.backgroundImage = "url(./images/backgrounds/Endingm2.jpg"
                 dialog.textContent = "*You have gathered all keys and made the master key*"
                 dialog.onclick = "none"
-                dialog.onclick = function(){WIN()}
+                dialog.onclick = function(){WIN(), title.style.color = "rgb(240,240,240)"}
             }
         }
     }
@@ -924,7 +963,7 @@ function Caveroom()
             }
         }
     }
-    else if (beenhere["Caveroom"] === 1 && haveitem["shimmer"] != 1)
+    else if (beenhere["Caveroom"] === 1 && haveitem["Keyblack"] != 1 || haveitem["shimmer"] != 1)
     {
         Caveroomchoice()
     }
@@ -971,7 +1010,7 @@ function Caveroomchoice()
         {
             NoChoices()
             dialog.textContent = "You go back to the hallway"
-            dialog.onclick = function(){Hallwayleft()}
+            dialog.onclick = function(){Hallwayleft(), Keyblackstuck.remove(), gemsocket.remove()}
         }
 
         gemsocket.onclick = function()
@@ -1005,7 +1044,7 @@ function Caveroomchoice()
                             dialog.onclick = function()
                             {
                                 dialog.textContent = "Great now you can take the key"
-                                dialog.onclick = function()
+                                Keyblackstuck.onclick = function()
                                 {
                                     background.style.backgroundImage = "url(./images/backgrounds/Caveroomkeygone.jpg"
                                     haveitem["Keyblack"] = 1
@@ -1063,6 +1102,33 @@ function Caveroomchoice()
                     }
                 }
             }
+            else
+            {
+                dialog.textContent = "There is a gem socket here"
+                dialog.onclick = function()
+                {
+                    dialog.textContent = "Maybe there is one around"
+                    dialog.onclick = function(){Caveroom()}
+                }
+            }
+        }
+        Keyblackstuck.onclick = function()
+        {
+            if(haveitem["Keyblack"] === 1)
+            {
+                dialog.textContent = "The key is stuck"
+                dialog.onclick = function()
+                {
+                    dialog.textContent = "There should be a way to get it in this room"
+                    dialog.onclick = function(){Caveroom()}
+                }
+            }
+            else
+            {
+                dialog.textContent = "You got it already"
+                dialog.onclick = function(){Caveroom()}
+            }
+            
         }
     }
 }
@@ -1599,7 +1665,7 @@ function keyrecipedisplay()
 }
 function dumbwaitertrading()
 {
-    if(haveitem["shimmer"] === 1 || haveitem["Keygold"] === 1 || haveitem["Keywhite"] === 1 || haveitem["Keyblack"] === 1)
+    if(haveitem["shimmer"] === 1 || haveitem["Keygold"] === 1 || haveitem["Keywhite"] === 1 || haveitem["Keyblack"] === 1 || haveitem["Crowbar"] === true || haveitem["Trowel"] === true || haveitem["KeyBW"] === true || haveitem["Keymaster"] === true)
     {
         Choices()
         dialog.textContent = "Do you want to put all your items in the dumbwaiter?"
@@ -1660,11 +1726,11 @@ function dumbwaitertrading()
                                         inv3.style.display = "none"
                                         inv4.style.display = "none"
 
-                                        if(haveitem["Crowbar"] = true)////////////////////////////////////////////////////////////////////////////////////
+                                        if(haveitem["Crowbar"] === true)////////////////////////////////////////////////////////////////////////////////////
                                         {
                                             inv5.style.display = "unset"
                                         }
-                                        if(haveitem["Trowel"] = true)
+                                        if(haveitem["Trowel"] === true)
                                         {
                                             inv6.style.display = "unset"
                                         }
@@ -1697,11 +1763,11 @@ function dumbwaitertrading()
                                         inv3.style.display = "none"
                                         inv4.style.display = "none"
 
-                                        if(haveitem["Crowbar"] = true)//////////////////////////////////////////////////////////////////////////////////////
+                                        if(haveitem["Crowbar"] === true)//////////////////////////////////////////////////////////////////////////////////////
                                         {
                                             inv5.style.display = "unset"
                                         }
-                                        if(haveitem["Trowel"] = true)
+                                        if(haveitem["Trowel"] === true)
                                         {
                                             inv6.style.display = "unset"
                                         }
@@ -1719,7 +1785,7 @@ function dumbwaitertrading()
                                     dialog.textContent = "Nothing happend"
                                     dialog.onclick = function()
                                     {
-                                        if(haveitem["shimmer"] === 1)
+                                        if(haveitem["shimmer"] === 1 || haveitem["Keymaster"] === 1 || haveitem["KeyBW"] === 1)
                                         {
                                             inv1.style.display = "unset"
                                         }
@@ -1735,11 +1801,11 @@ function dumbwaitertrading()
                                         {
                                             inv4.style.display = "unset"
                                         }
-                                        if(haveitem["Crowbar"] === 1)////////////////////////////////////////////////////////////////////////////////////////////
+                                        if(haveitem["Crowbar"] === true)////////////////////////////////////////////////////////////////////////////////////////////
                                         {
                                             inv5.style.display = "unset"
                                         }
-                                        if(haveitem["Trowel"] === 1)
+                                        if(haveitem["Trowel"] === true)
                                         {
                                             inv6.style.display = "unset"
                                         }
@@ -1833,6 +1899,7 @@ function WIN()
     title.style.color = "white"
     titleanimation()
     inventory.style.display = "none"
+    
     background.style.backgroundImage = "none"
     dialog.textContent = "You made it!"
     dialog.onclick = function()
@@ -1893,6 +1960,8 @@ function NoChoices()
     keuze1.textContent = "NONSET YOU DUMMY"
     keuze2.textContent = "NONSET YOU DUMMY"
     keuze3.textContent = "NONSET YOU DUMMY"
+
+    keuze4.style.display = "none"
 }
 function Choices()
 {
