@@ -1114,6 +1114,7 @@ function Caveroomchoice()
         }
         Keyblackstuck.onclick = function()
         {
+            NoChoices()
             if(haveitem["Keyblack"] != 1)
             {
                 dialog.textContent = "The key is stuck"
@@ -1785,7 +1786,7 @@ function dumbwaitertrading()
                                     dialog.textContent = "Nothing happend"
                                     dialog.onclick = function()
                                     {
-                                        if(haveitem["shimmer"] === 1 || haveitem["Keymaster"] === 1 || haveitem["KeyBW"] === 1)
+                                        if(haveitem["shimmer"] === 1 || haveitem["Keymaster"] === true || haveitem["KeyBW"] === true)
                                         {
                                             inv1.style.display = "unset"
                                         }
@@ -1843,6 +1844,7 @@ function death(deathmessage)
     inventory.style.display = "none"
     background.style.backgroundImage = "none" 
     dialog.style.display = "none"
+    title.textContent = "U DIED"
     background.style.animationPlayState = "running"
     setTimeout(function(){background.style.animationPlayState = "paused"}, 5000)
     
@@ -1897,7 +1899,8 @@ function WIN()
 {
     title.textContent = "Congratulations!"
     title.style.color = "white"
-    titleanimation()
+    title.style.animationPlayState = "running"
+    setTimeout(function(){title.style.animationPlayState = "paused"},2400)
     inventory.style.display = "none"
     
     background.style.backgroundImage = "none"
