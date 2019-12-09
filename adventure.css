@@ -125,7 +125,6 @@ body{
    background-color: rgba(255, 255, 255, 0.678);
    border: rgba(0, 0, 0, 0.39) 5px solid;
    border-radius: 20px 20px 0px 0px;
-   border-style: solid;
 }
 
 #game-buttons
