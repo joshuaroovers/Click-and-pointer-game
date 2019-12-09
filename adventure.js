@@ -928,6 +928,9 @@ function Caveroom()
                     if(cavetimer === true)
                     {
                         NoChoices()
+                        background.style.animationPlayState = "paused"
+                        background.style.animationName = "death"
+                        background.style.animationDuration = "5s"
                         death("You didn't make it out of the caveroom in time")
                     }
                 },3000)
@@ -1898,7 +1901,7 @@ function death(deathmessage)
 function WIN()
 {
     title.textContent = "Congratulations!"
-    title.style.color = "white"
+
     title.style.animationPlayState = "running"
     setTimeout(function(){title.style.animationPlayState = "paused"},2400)
     inventory.style.display = "none"
