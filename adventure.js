@@ -107,7 +107,7 @@ function Start()
     dialog.textContent = "click on this dialog box to continue"
     dialog.onclick = function()
     {
-        dialog.textContent = "This game is an adventure game where you look for items and try to find your way out while trying not to die"
+        dialog.textContent = "This game is a point and click game where you look for items and try to find your way out while trying not to die"
         dialog.onclick = function()
         {
             dialog.textContent = "So be carefull, one miss step can and will send you all the way back to the start"
