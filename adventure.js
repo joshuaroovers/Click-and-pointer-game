@@ -3,8 +3,8 @@ levelname = {one : "Entrance", two : "Left Hallway", three : "Right Hallway", fo
 haveitem = {Keyblack : 0, Keygold : 0, Keywhite : 0, shimmer : 0, KeyBW : false, Keymaster : false, Crowbar : false, Trowel : false}/////0 is false, 1 is true, 2 is used to have but crafted into something else
 //make shure it's possible to be inserted in the dumb waiter
 beenhere = {Entrance : false, NoKey : false, Hallwayright : false, Hallwayleft : false, Workshop : false, Dumbwaiter : false, Locker : 0, Greenhouse : false, 𝒫𝑒𝒶𝒸𝑒𝒻𝓊𝓁𝓁𝓇𝑜𝑜𝓂 : 0, Caveroom : 0}
-//locker is special case since you shouldn't die if you did take the item and go back
-freeinvslot = {inv1 : true, inv2 : true, inv3 : true, inv4 : true, inv5 : true}
+//locker is special case since you shouldn't die if you did take the item and go back, Peacfullroom is also repeatable if you go right first, Caveroom is also "repeatable" as you can return to get the gem
+
 
 restarttext = ["Goodluck!", "Try not to die", "Goodluck you'll need it", "See you there", "Restarting...", "1 key to rule them all", "Beware the eyes", "Be nice to plants", "beware the light in the dark", "I'll be watching you"]
 deathtaunting = ["Is it too hard for you?", "Oh well too bad", "Thought so", "Good bye then", "Are you sure you got everything?", "Bye bye bye", "... I'll miss you"]
@@ -922,7 +922,7 @@ function Caveroom()
                 beenhere["Caveroom"] = 2
                 dialog.onclick = function(){Hallwayleft(), background.style.animationPlayState = "paused"}
             }
-            setTimeout(
+            /* setTimeout(
                 function()
                 {
                     if(cavetimer === true)
@@ -933,7 +933,7 @@ function Caveroom()
                         background.style.animationDuration = "5s"
                         death("You didn't make it out of the caveroom in time")
                     }
-                },3000)
+                },3000) */
         }
     }
 
